@@ -1,0 +1,899 @@
+/* ===================================================
+   VARIABLES GLOBALES — SUPERCAR THEME
+   =================================================== */
+:root {
+  --noir: #080808;
+  --noir-2: #111111;
+  --noir-3: #1a1a1a;
+  --gris: #2a2a2a;
+  --crimson: #dc143c;
+  --crimson-dark: #a00028;
+  --crimson-glow: rgba(220, 20, 60, 0.25);
+  --blanc: #ffffff;
+  --blanc-soft: #e8e8e8;
+  --muted: #888888;
+  --tr: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 12px;
+  --header-h: 70px;
+}
+
+/* ===================================================
+   RESET
+   =================================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: var(--noir);
+  color: var(--blanc-soft);
+  padding-top: var(--header-h);
+}
+
+/* ===================================================
+   HEADER
+   =================================================== */
+.tete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  background: linear-gradient(90deg, #000 0%, #0d0d0d 100%);
+  border-bottom: 1px solid #1e1e1e;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  gap: 40px;
+  z-index: 10000;
+}
+
+.logo {
+  height: var(--header-h);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.logo_cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.logo_cont img {
+  max-height: calc(var(--header-h) - 10px);
+  width: auto;
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.pages a {
+  position: relative;
+  text-decoration: none;
+  color: var(--blanc-soft);
+  font-size: 14px;
+  padding: 4px 0;
+  white-space: nowrap;
+  transition: color var(--tr);
+}
+
+.pages a::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--crimson);
+  border-radius: 2px;
+  transition: width var(--tr);
+}
+
+.pages a:hover {
+  color: #fff;
+}
+
+.pages a:hover::after {
+  width: 100%;
+}
+
+.admin a {
+  background: var(--crimson);
+  padding: 7px 18px;
+  border-radius: 30px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 2px 14px var(--crimson-glow);
+  transition:
+    background var(--tr),
+    transform var(--tr),
+    box-shadow var(--tr);
+}
+
+.admin a:hover {
+  background: var(--crimson-dark);
+  transform: translateY(-1px);
+}
+
+.dropdown {
+  position: relative;
+}
+
+#dropdownBtn {
+  background: transparent;
+  color: var(--blanc-soft);
+  border: 1px solid #333;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: "Georgia", serif;
+  white-space: nowrap;
+  transition:
+    border-color var(--tr),
+    background var(--tr),
+    color var(--tr);
+}
+
+#dropdownBtn:hover {
+  border-color: var(--crimson);
+  background: rgba(220, 20, 60, 0.1);
+  color: #fff;
+}
+
+.Drop_item {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: var(--noir-2);
+  border: 1px solid #222;
+  border-radius: var(--radius);
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition:
+    max-height 0.35s ease,
+    padding 0.35s ease;
+  z-index: 10001;
+  min-width: 170px;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.7);
+}
+
+.Drop_item a {
+  color: var(--blanc-soft);
+  text-decoration: none;
+  padding: 10px 4px;
+  font-size: 14px;
+  border-bottom: 1px solid #1e1e1e;
+  transition:
+    color var(--tr),
+    padding-left var(--tr);
+  display: block;
+}
+
+.Drop_item a:last-child {
+  border-bottom: none;
+}
+
+.Drop_item a:hover {
+  color: var(--crimson);
+  padding-left: 10px;
+}
+
+.Drop_item.show {
+  max-height: 200px;
+  padding: 6px 14px;
+}
+
+/* Hamburger mobile */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid #333;
+  color: var(--blanc-soft);
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    border-color var(--tr),
+    background var(--tr);
+}
+
+.menu-toggle:hover {
+  border-color: var(--crimson);
+  background: rgba(220, 20, 60, 0.1);
+}
+
+/* Menu mobile overlay */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  width: 100%;
+  background: #000;
+  z-index: 9999;
+  flex-direction: column;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--crimson);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  color: var(--blanc-soft);
+  text-decoration: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-bottom: 1px solid #1a1a1a;
+  transition:
+    color var(--tr),
+    background var(--tr),
+    padding-left var(--tr);
+}
+
+.mobile-menu a:hover {
+  color: var(--crimson);
+  background: rgba(220, 20, 60, 0.05);
+  padding-left: 36px;
+}
+
+/* ===================================================
+   CAROUSEL
+   =================================================== */
+.carousel {
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  /* évite le décalage de la barre d'adresse sur mobile */
+  overflow: hidden;
+  position: relative;
+  margin-top: calc(-1 * var(--header-h));
+  background: #000;
+  /* couleur des bandes si le ratio écran ≠ ratio image */
+}
+
+.slide {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  object-fit: contain;
+  /* était "cover" : l'image est maintenant entière */
+  object-position: center;
+  transition: left 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.6) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.slide.active {
+  left: 0;
+}
+
+.carou_text {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  z-index: 9998;
+  max-width: 580px;
+}
+
+.carou_text h1 {
+  color: #fff;
+  font-size: 58px;
+  font-family: "Georgia", serif;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.carou_text h2 {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 20px;
+  font-weight: normal;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+.carou_btn {
+  background: var(--crimson);
+  color: #fff;
+  border: none;
+  padding: 13px 26px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-family: "Georgia", serif;
+  cursor: pointer;
+  margin-right: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 20px var(--crimson-glow);
+  transition:
+    background var(--tr),
+    transform var(--tr),
+    box-shadow var(--tr);
+}
+
+.carou_btn:hover {
+  background: var(--crimson-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--crimson-glow);
+}
+
+/* ===================================================
+   CREDOS
+   =================================================== */
+.credo {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  padding: 60px 4%;
+  background: var(--noir);
+}
+
+.credo_element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 40px 24px;
+  gap: 14px;
+  text-align: center;
+  background: var(--noir-2);
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  color: #fff;
+  transition:
+    transform var(--tr),
+    box-shadow var(--tr),
+    border-color var(--tr);
+}
+
+.credo_element:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px var(--crimson-glow);
+  border-color: var(--crimson);
+}
+
+.credo_element h2 {
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.credo_element p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+  border: 2px solid var(--crimson);
+  border-radius: 50%;
+  padding: 10px;
+  background: rgba(220, 20, 60, 0.08);
+  filter: invert(1);
+}
+
+/* ===================================================
+   VEDETTE / SHOWCASE
+   =================================================== */
+.annonce {
+  background: var(--noir);
+  border-top: 1px solid #1a1a1a;
+  padding: 10px 0 30px;
+}
+
+.vedette {
+  text-align: center;
+}
+
+.vedette h1 {
+  font-size: 36px;
+  color: #fff;
+  font-family: "Georgia", serif;
+  margin-bottom: 8px;
+}
+
+.vedette h3 {
+  color: var(--muted);
+  font-weight: normal;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.voiture_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 8px 4px;
+  background: var(--noir-2);
+  border: 1px solid #1e1e1e;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.voiture_vedette {
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.voiture_vedette_element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: calc(33.33% - 2.67px);
+  width: calc(33.33% - 2.67px);
+  height: 260px;
+  /* augmenté pour meilleure visibilité sans casser l'harmonie */
+  background: var(--noir-3);
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition:
+    transform var(--tr),
+    border-color var(--tr),
+    box-shadow var(--tr);
+}
+
+.voiture_vedette_element:hover {
+  transform: translateY(-4px);
+  border-color: var(--crimson);
+  box-shadow: 0 10px 32px var(--crimson-glow);
+}
+
+.V_image_element {
+  width: 100%;
+  height: 68%;
+  /* ajusté pour rester proportionnel à la nouvelle hauteur */
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+}
+
+.voiture_vedette_element a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  background: var(--crimson);
+  border-radius: 6px;
+  padding: 6px 16px;
+  margin-top: 12px;
+  transition:
+    background var(--tr),
+    transform var(--tr);
+}
+
+.voiture_vedette_element a:hover {
+  background: var(--crimson-dark);
+  transform: scale(0.97);
+}
+
+.voiture_container button {
+  border: 1px solid #2a2a2a;
+  width: 40px;
+  height: 40px;
+  max-width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: var(--noir-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--tr),
+    border-color var(--tr),
+    transform var(--tr);
+  flex-shrink: 0;
+}
+
+.voiture_container button:hover {
+  background: var(--crimson);
+  border-color: var(--crimson);
+  transform: scale(1.08);
+}
+
+.fleche {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
+}
+
+.suivant {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Georgia", serif;
+  background: var(--crimson);
+  border-radius: 7px;
+  padding: 10px 28px;
+  margin: 20px auto 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 16px var(--crimson-glow);
+  transition:
+    background var(--tr),
+    transform var(--tr),
+    box-shadow var(--tr);
+}
+
+.suivant:hover {
+  background: var(--crimson-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--crimson-glow);
+}
+
+/* ===================================================
+   CTA
+   =================================================== */
+.cta-section {
+  background: linear-gradient(135deg, #0a0a0a 0%, #150505 50%, #0a0a0a 100%);
+  text-align: center;
+  padding: 80px 20px;
+  border-top: 1px solid #1a1a1a;
+}
+
+.cta-section h1 {
+  font-size: 42px;
+  color: #fff;
+  font-family: "Georgia", serif;
+  margin-bottom: 12px;
+}
+
+.cta-section h3 {
+  font-size: 18px;
+  color: var(--muted);
+  font-weight: normal;
+  margin-bottom: 32px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--crimson);
+  color: #fff;
+  padding: 16px 40px;
+  font-size: 17px;
+  font-family: "Georgia", serif;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 24px var(--crimson-glow);
+  transition:
+    background var(--tr),
+    transform var(--tr),
+    box-shadow var(--tr);
+}
+
+.cta-button:hover {
+  background: var(--crimson-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px var(--crimson-glow);
+}
+
+/* ===================================================
+   FADE ANIMATION
+   =================================================== */
+.fade-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.fade-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+footer {
+  background: #050505;
+  padding: 60px 30px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid #1a1a1a;
+}
+
+footer div {
+  flex: 1 1 260px;
+}
+
+footer h2 {
+  font-size: 18px;
+  color: var(--crimson);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+footer p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  transition:
+    background var(--tr),
+    transform var(--tr),
+    border-color var(--tr);
+}
+
+.socials a:hover {
+  background: var(--crimson);
+  border-color: var(--crimson);
+  transform: translateY(-2px);
+}
+
+.socials img {
+  width: 18px;
+  filter: invert(1);
+}
+
+footer hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #1a1a1a;
+  margin-top: 30px;
+}
+
+footer .copyright {
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #444;
+}
+
+#mentionsLegalesOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+#mentionsLegales {
+  background: #000;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 8px;
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: rgb(208, 207, 207);
+  line-height: 1.6;
+}
+
+#mentionsLegales p {
+  margin-bottom: 30px;
+}
+
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 1024px) {
+  .pages {
+    gap: 16px;
+  }
+
+  .pages a {
+    font-size: 13px;
+  }
+
+  .carou_text h1 {
+    font-size: 46px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pages {
+    display: none;
+  }
+
+  .admin {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .carou_text h1 {
+    font-size: 34px;
+  }
+
+  .carou_text h2 {
+    font-size: 16px;
+  }
+
+  .carou_btn {
+    padding: 10px 18px;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+
+  .credo {
+    flex-direction: column;
+    padding: 30px 16px;
+  }
+
+  .credo_element {
+    width: 100%;
+    padding: 28px 20px;
+  }
+
+  .voiture_container {
+    margin: 0 2%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .voiture_vedette {
+    gap: 12px;
+  }
+
+  .voiture_vedette_element {
+    min-width: 80%;
+    width: 80%;
+    height: 300px;
+  }
+
+  .cta-section h1 {
+    font-size: 28px;
+  }
+
+  .cta-section h3 {
+    font-size: 15px;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px 20px;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+
+  .carousel {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    /* à adapter au ratio réel de vos images */
+    margin-top: 0;
+    /* voir remarque ci-dessous */
+  }
+
+  .carou_text {
+    top: auto;
+    bottom: 12px;
+    left: 5%;
+    transform: none;
+    max-width: 90%;
+  }
+
+  .carou_text h2 {
+    display: none;
+    /* le sous-titre ne tient pas sur une image aussi basse */
+  }
+}
+
+@media (max-width: 480px) {
+  .tete {
+    padding: 0 16px;
+  }
+
+  #dropdownBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .carou_text {
+    left: 5%;
+    max-width: 90%;
+  }
+
+  .carou_text h1 {
+    font-size: 26px;
+  }
+
+  .carou_text h2 {
+    font-size: 14px;
+  }
+
+  .voiture_container {
+    margin: 0 1%;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .voiture_vedette {
+    gap: 8px;
+  }
+
+  .voiture_vedette_element {
+    min-width: 100%;
+    width: 100%;
+    height: 280px;
+  }
+}

@@ -1,0 +1,65 @@
+#mentionsLegalesOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+#mentionsLegales {
+  background: #000;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 8px;
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: rgb(208, 207, 207);
+  line-height: 1.6;
+}
+
+#mentionsLegales p {
+  margin-bottom: 30px;
+}
+
+#ConfidentialiteOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+#Confidentialite {
+  background: #000;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 8px;
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: rgb(208, 207, 207);
+  line-height: 1.6;
+}
+
+#Confidentialite p {
+  margin-bottom: 30px;
+}
+
+.copyright a {
+  margin:10px
+}
